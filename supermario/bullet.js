@@ -20,7 +20,7 @@ class Bullet {
 
     draw() {
         this.ctx.beginPath();
-        this.ctx.fillStyle = "red";
+        this.ctx.fillStyle = "orange";
         this.ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2)
         this.ctx.fill();
         this.ctx.closePath();
@@ -30,13 +30,13 @@ class Bullet {
         // Avance pelota
         this.x += this.vx;
 
-        // Caida pelota 
+        /* // Caida pelota 
         this.vy += this.gravity;
-        this.y += this.vy;
+        this.y += this.vy; */
 
-        // Rebote
+     /*    // Rebote
         if(this.y > this.y0 + this.playerH) {
             this.vy *= -1;
-        }
+        } */
     }
 }

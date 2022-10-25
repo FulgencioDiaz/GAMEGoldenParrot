@@ -10,12 +10,12 @@ class Obstacle {
         this.y = playerY + playerH - this.h - 5;
         
         console.log(playerY);
-        console.log(this.y)
+        console.log(this.y);
 
     }
 
     draw() {
-        this.ctx.fillStyle = "black";
+        this.ctx.fillStyle = "green";
         this.ctx.fillRect(this.x, this.y, this.w, this.h)
     }
 

@@ -6,7 +6,10 @@ const Game = {
     keys: {
         TOP_KEY: 38,
         DOWN_KEY: 40,
-        SPACE: 32
+        RIGHT_KEY: 39,
+        LEFT_KEY: 37,
+        SPACE: 32,
+
     },
 
     init: function () {
@@ -40,14 +43,18 @@ const Game = {
             }
 
             // Cada 50 frame genera un obtaculo
-            if(this.frameCounter % 50 === 0) {
+            if(this.frameCounter % 300 === 0) {
                 this.generateObstacle()
+                this.genarateEnemyAguilucho()
+                this.generateDinerito()
             }
 
             this.moveAll();
             this.drawAll();
 
             this.clearObstacles()
+            this.clearEnemyAguiluchos()
+            this.clearDinerito()
 
             if(this.isCollision()) {
                 this.gameOver();
@@ -60,9 +67,13 @@ const Game = {
     reset: function() {
         this.background = new Background(this.canvas.width, this.canvas.height, this.ctx)
         this.player = new Player(this.canvas.width, this.canvas.height, this.ctx, this.keys)
+        // this.enemy = new Enemy(this.canvas.width, this.canvas.height, this.ctx)
+       
         // this.scoreBoard = ScoreBoard
         this.score = 0;
-        this.obstacles = []
+        this.obstacles = [];
+        this.enemyAguiluchos = [];
+        this.dinerito = [];
         this.scoreBoard = ScoreBoard;
         this.frameCounter = 0
     },
@@ -70,9 +81,17 @@ const Game = {
     moveAll: function() {
         this.background.move()
         this.player.move()
+        //this.enemy.move()
 
         this.obstacles.forEach(obstacle => {
             obstacle.move()
+        })
+        this.dinerito.forEach(dinerito => {
+            dinerito.move()
+        })
+
+        this.enemyAguiluchos.forEach(aguilucho => {
+            aguilucho.move()
         })
     },
 
@@ -80,8 +99,15 @@ const Game = {
     
         this.background.draw()
         this.player.draw(this.frameCounter)
+      
         this.obstacles.forEach(obstacle => {
             obstacle.draw()
+        })
+        this.dinerito.forEach(dinerito => {
+            dinerito.draw(this.frameCounter)
+        })
+        this.enemyAguiluchos.forEach(aguilucho => {
+            aguilucho.draw(this.frameCounter)
         })
 
         this.drawScore();
@@ -96,9 +122,29 @@ const Game = {
             new Obstacle(this.canvas.width, this.player.y0, this.player.h, this.ctx)
         )
     },
+    generateDinerito: function() {
+        this.dinerito.push(
+            new Dinerito(this.canvas.width, this.canvas.height, this.ctx)
+        )
+    },
+
+    genarateEnemyAguilucho: function() {
+        this.enemyAguiluchos.push(
+            new Enemy(this.canvas.width, this.canvas.height, this.ctx)
+        )
+    },
+
+    
 
     clearObstacles: function() {
         this.obstacles = this.obstacles.filter((obstacle) => obstacle.x >= 0)
+    },
+    clearDinerito: function() {
+        this.dinerito = this.dinerito.filter((dinerito) => dinerito.x >= 0)
+    },
+
+    clearEnemyAguiluchos: function() {
+        this.enemyAguiluchos = this.enemyAguiluchos.filter((aguilucho) => aguilucho.x >= 0)
     },
 
     isCollision: function() {
@@ -108,6 +154,16 @@ const Game = {
             this.player.x < obstacle.x + obstacle.w &&
             this.player.y + (this.player.h - 20) >= obstacle.y)
         })
+    },
+
+    isDinerito: function() {
+        console.log("DINERO!")
+        return this.dinerito.some(dinerito => {
+            return (this.player.x + this.player.w >= dinerito.x &&
+            this.player.x < dinerito.x + dinerito.w &&
+            this.player.y + (this.player.h - 20) >= dinerito.y)
+        })
+
     },
 
   /*   gameOver: function() {

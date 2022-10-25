@@ -7,13 +7,16 @@ class Player {
         this.canvasH = h;
         
         this.keys = keys;
-      
+
+        this.x0 = this.x
         this.x = this.canvasW * 0.08
 
         // Posición original
         this.y0 = this.canvasH * 0.5;
         
         this.y = this.y0;
+
+        
 
         this.img = new Image();
         this.img.src = "/Users/funche/Desktop/Bootcamp/juego/supermario/img/PngItem_1936084(nuevo).png"
@@ -30,6 +33,8 @@ class Player {
         this.setListeners();    
         
         this.dy = 0;
+
+        this.nx = 0;
     }
 
 
@@ -50,6 +55,18 @@ class Player {
                 ){
                 this.dy = -3
             }
+            else if (
+
+                event.keyCode === this.keys.RIGHT_KEY
+            ) {
+                this.nx = -3
+            }
+            else if (
+
+                event.keyCode === this.keys.LEFT_KEY
+            ) {
+                this.nx = 3
+            }
             
             else if (
 
@@ -57,6 +74,7 @@ class Player {
             ) {
                 this.shoot()
             }
+            
         }.bind(this)
 
         document.onkeyup = function(event) {
@@ -73,6 +91,17 @@ class Player {
 
             ) {
                 this.dy = 0
+            }
+
+            else if (
+                event.keyCode === this.keys.RIGHT_KEY
+            ) {
+                this.nx = 0
+            }
+            else if (
+                event.keyCode === this.keys.LEFT_KEY
+            ) {
+                this.nx = 0
             }
             
         }.bind(this)
@@ -113,6 +142,7 @@ class Player {
        
 
        this.y -= this.dy
+       this.x -= this.nx
 
     }
   
