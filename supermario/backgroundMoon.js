@@ -1,17 +1,17 @@
-class Background {
+class BackgroundMoon {
     constructor(w, h, ctx) {
         this.ctx = ctx;
-        this.w = w;
-        this.h = h;
+        this.w = innerWidth;
+        this.h = innerHeight;
 
         this.img = new Image();
-        this.img.src = "/Users/funche/Desktop/Bootcamp/juego/supermario/img/assets_-LDgX-RykK9XCDxfIhX__-LDgX7Ifr9nc11ubI925_-LDgXIVR3MFdOFpoiX0w_sky-clouds.jpeg"
+        this.img.src = "/Users/funche/Desktop/Bootcamp/juego/supermario/img/Lovepik_com-400257363-sea-waves(BUENA).png"
 
         this.x = 0;
-        this.y = 0;
+        this.y = 120;
         
         // desplazamiento
-        this.dx = 1;
+        this.dx = 15.5;
     }
     
     draw() {
@@ -23,13 +23,13 @@ class Background {
             this.h
         )
 
-        this.ctx.drawImage(
+         this.ctx.drawImage(
             this.img,
             this.x + this.w,
             this.y,
             this.w,
             this.h
-        )
+        ) 
     }
 
     move() {
@@ -37,4 +37,5 @@ class Background {
         
         if( this.x < -this.w) this.x = 0;
     }
+    
 }

@@ -11,7 +11,7 @@ class Enemy {
         this.x = this.canvasW
        
 
-        this.y = Math.floor(Math.random() * 450)
+        this.y = Math.floor(Math.random() * 420)
        
 
         
@@ -22,11 +22,16 @@ class Enemy {
         this.img.frames = 4;
         this.img.frameIndex = 0;
 
-        this.w = 143;
-        this.h = 175;
+        this.w = 110;
+        this.h = 250;
 
       
-        this.dx = 1; 
+        this.dx = 2; 
+
+        this.vy = 1;
+
+        this.gravity = 0
+        
         
 
     }
@@ -60,6 +65,8 @@ class Enemy {
     }
     move() {
         this.x -= this.dx;
+       /*  this.vy -= this.gravity;
+        this.y -= this.vy; */
     }
 }
 

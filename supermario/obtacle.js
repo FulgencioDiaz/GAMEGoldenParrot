@@ -4,7 +4,7 @@ class Obstacle {
         this.w = 15;
         this.h = this.w * 3
 
-        this.dx = 10;
+        this.dx = 7;
 
         this.x = w;
         this.y = playerY + playerH - this.h - 5;

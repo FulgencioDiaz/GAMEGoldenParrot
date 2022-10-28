@@ -8,10 +8,11 @@ class Dinerito {
         
      
         this.x0 = this.x
-        this.x = this.canvasW
-       
 
-        this.y = Math.floor(Math.random() * 100)
+      
+
+        this.x = this.canvasW
+        this.y = Math.floor(Math.random() * 500)
     
 
         this.img = new Image();
@@ -25,6 +26,10 @@ class Dinerito {
 
       
         this.dx = 1; 
+        
+        this.vy = 1;
+
+        this.gravity = 0.25
         
 
     }
@@ -58,6 +63,9 @@ class Dinerito {
     }
     move() {
         this.x -= this.dx;
+
+        /* this.vy -= this.gravity;
+        this.y -= this.vy; */
     }
 }
 

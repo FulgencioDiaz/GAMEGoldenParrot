@@ -47,25 +47,25 @@ class Player {
                 event.keyCode === this.keys.TOP_KEY 
                 
                 ) {
-                  this.dy = 3
+                  this.dy = -6
 
             }
             else if(
                 event.keyCode === this.keys.DOWN_KEY
                 ){
-                this.dy = -3
+                this.dy = 6
             }
             else if (
 
                 event.keyCode === this.keys.RIGHT_KEY
             ) {
-                this.nx = -3
+                this.nx = 6
             }
             else if (
 
                 event.keyCode === this.keys.LEFT_KEY
             ) {
-                this.nx = 3
+                this.nx = -6
             }
             
             else if (
@@ -138,11 +138,26 @@ class Player {
 
     move() {
         
-        // Gravedad del salto
-       
+      
+       if (
+       (this.x + this.w <= this.canvasW && this.x >= 0) ||
+        (this.x + this.w >= this.canvasW && this.nx <= 0) ||
+        (this.x <= 0 && this.nx > 0)
+       ){
+        this.x += this.nx 
+       }
 
-       this.y -= this.dy
-       this.x -= this.nx
+       if(
+        (this.y + this.h <= this.canvasH && this.y >= -70 ) ||
+        (this.y + this.h >= this.canvasH && this.dy <= 0) ||
+        (this.y <= 0 && this.dy > 0) 
+       ) {
+        this.y += this.dy
+        
+       }
+        
+    
+
 
     }
   

@@ -36,7 +36,7 @@ const Game = {
             // frameCounter es el mecanismo para programar acciones periodicas por ejemplo cada 50 frame genera un obtaculo o cada 6 frame cambia el skin del personaje
             this.frameCounter++;
 
-            this.score += 0.01;
+            
 
             if(this.frameCounter > 1000) {
                 this.frameCounter = 0;
@@ -44,10 +44,31 @@ const Game = {
 
             // Cada 50 frame genera un obtaculo
             if(this.frameCounter % 300 === 0) {
-                this.generateObstacle()
-                this.genarateEnemyAguilucho()
+                //this.generateObstacle()
+            this.genarateEnemyAguilucho()
+                
+            }
+            if(this.frameCounter % 200 === 0) {
+               
                 this.generateDinerito()
             }
+
+
+            if (this.monedero > 1) {
+                this.barco.move()
+
+             if (this.barco.x < 100){
+                this.barco.dx = 0
+                console.log("APARECE BARCO")
+
+             if (this.player.x = this.barco.x ){
+                this.monedero = 0
+                this.player.x = this.player.x
+                
+
+             }
+            }}
+        
 
             this.moveAll();
             this.drawAll();
@@ -56,37 +77,51 @@ const Game = {
             this.clearEnemyAguiluchos()
             this.clearDinerito()
 
-            if(this.isCollision()) {
-                this.gameOver();
+            if(this.isDinerito()) {
+                //this.gameOver()
+                
+                this.monedero++;
+            }
+
+            if(this.isEnemiguito()) {
+              this.gameOver();
             }
 
         }, 1000 / this.fps)
-
+     
     },
 
     reset: function() {
         this.background = new Background(this.canvas.width, this.canvas.height, this.ctx)
+        this.barco = new Barco(this.canvas.width, this.canvas.height, this.ctx)
+        this.backgroundMoon = new BackgroundMoon(this.canvas.width, this.canvas.height, this.ctx)
         this.player = new Player(this.canvas.width, this.canvas.height, this.ctx, this.keys)
         // this.enemy = new Enemy(this.canvas.width, this.canvas.height, this.ctx)
        
-        // this.scoreBoard = ScoreBoard
-        this.score = 0;
+        
+        this.monedero = 0;
+        this.cofre = 0;
+
         this.obstacles = [];
         this.enemyAguiluchos = [];
-        this.dinerito = [];
+        this.dineritos = [];
         this.scoreBoard = ScoreBoard;
         this.frameCounter = 0
+        
+       
     },
 
     moveAll: function() {
         this.background.move()
+        /* this.barco.move() */
+        this.backgroundMoon.move()
         this.player.move()
-        //this.enemy.move()
+       
 
         this.obstacles.forEach(obstacle => {
             obstacle.move()
         })
-        this.dinerito.forEach(dinerito => {
+        this.dineritos.forEach(dinerito => {
             dinerito.move()
         })
 
@@ -98,12 +133,14 @@ const Game = {
     drawAll: function() {
     
         this.background.draw()
+        this.backgroundMoon.draw()
+        this.barco.draw()
         this.player.draw(this.frameCounter)
       
         this.obstacles.forEach(obstacle => {
             obstacle.draw()
         })
-        this.dinerito.forEach(dinerito => {
+        this.dineritos.forEach(dinerito => {
             dinerito.draw(this.frameCounter)
         })
         this.enemyAguiluchos.forEach(aguilucho => {
@@ -123,7 +160,7 @@ const Game = {
         )
     },
     generateDinerito: function() {
-        this.dinerito.push(
+        this.dineritos.push(
             new Dinerito(this.canvas.width, this.canvas.height, this.ctx)
         )
     },
@@ -140,33 +177,50 @@ const Game = {
         this.obstacles = this.obstacles.filter((obstacle) => obstacle.x >= 0)
     },
     clearDinerito: function() {
-        this.dinerito = this.dinerito.filter((dinerito) => dinerito.x >= 0)
+        this.dineritos = this.dineritos.filter((dinerito) => dinerito.x >= 0)
     },
 
     clearEnemyAguiluchos: function() {
         this.enemyAguiluchos = this.enemyAguiluchos.filter((aguilucho) => aguilucho.x >= 0)
     },
 
-    isCollision: function() {
-        console.log("hol<colisi")
-        return this.obstacles.some(obstacle => {
-            return (this.player.x + this.player.w >= obstacle.x &&
-            this.player.x < obstacle.x + obstacle.w &&
-            this.player.y + (this.player.h - 20) >= obstacle.y)
-        })
-    },
+   
 
     isDinerito: function() {
-        console.log("DINERO!")
-        return this.dinerito.some(dinerito => {
-            return (this.player.x + this.player.w >= dinerito.x &&
-            this.player.x < dinerito.x + dinerito.w &&
-            this.player.y + (this.player.h - 20) >= dinerito.y)
-        })
+        return this.dineritos.some((dineritoSome) => {
+            const result = (
+            this.player.x + (this.player.w * 0.8) >= dineritoSome.x &&
+            this.player.x + (this.player.w * 0.3) <= dineritoSome.x + dineritoSome.w  &&
+            this.player.y + (this.player.h * 0.6) >= dineritoSome.y &&
+            this.player.y + (this.player.h * 0.4) <= dineritoSome.y + dineritoSome.h)
 
+            if (result) {
+                this.dineritos = this.dineritos.filter((dineritoFilter) => {return dineritoFilter !== dineritoSome})
+            }
+
+            return result
+        })
+    },
+    isEnemiguito: function() {
+        return this.enemyAguiluchos.some((enemySome) => {
+            const result = (
+            this.player.x + (this.player.w / 1.8) >= enemySome.x &&
+            this.player.x + (this.player.w * 0.3) <= enemySome.x + enemySome.w  &&
+            this.player.y + (this.player.h - 145) >= enemySome.y &&
+            this.player.y + (this.player.h) <= enemySome.y + enemySome.h)
+
+            if (result) {
+                this.enemyAguiluchos = this.enemyAguiluchos.filter((enemyFilter) => {return enemyFilter !== enemySome})
+            }
+
+            return result
+        })
     },
 
-  /*   gameOver: function() {
+    
+
+
+    gameOver: function() {
         console.log("game OV")
         this.stop();
 
@@ -174,10 +228,11 @@ const Game = {
             this.reset();
             this.start();
         }
-    }, */
+    }, 
+   
 
     drawScore: function() {
-        this.scoreBoard.update(this.score)
+        this.scoreBoard.update(this.monedero)
     }
 
 }
