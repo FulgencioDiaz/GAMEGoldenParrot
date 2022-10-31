@@ -28,6 +28,8 @@ class Barco {
 
     move() {
         this.x -= this.dx
+        
+        
         /* 
         if (this.monedero > 1) {
             this.barco.move()
@@ -35,10 +37,7 @@ class Barco {
 
             console.log("APARECE BARCO") */
         }
-        
+    
         
        // if( this.x < -this.w) this.x = 0;
     }
-
-
-    

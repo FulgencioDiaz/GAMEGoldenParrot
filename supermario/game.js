@@ -53,39 +53,63 @@ const Game = {
                 this.generateDinerito()
             }
 
-
+            console.log(this.monedero)
             if (this.monedero > 1) {
-                this.barco.move()
-
-             if (this.barco.x < 100){
                 this.barco.dx = 0
-                console.log("APARECE BARCO")
+            } else if(this.monedero == 0){
 
-             if (this.player.x = this.barco.x ){
+                this.barco.dx = 0.5
+            }
+            
+
+            
+             
+             
+             if ( this.player.x + (this.player.w * 0.8) >= this.barco.x &&
+             this.player.x + (this.player.w * 0.3) <= this.barco.x + this.barco.w  &&
+             this.player.y + (this.player.h * 0.6) >= this.barco.y &&
+             this.player.y + (this.player.h * 0.4) <= this.barco.y + this.barco.h)
+             {
                 this.monedero = 0
-                this.player.x = this.player.x
-                
-
+             
+         
+                console.log("CONTADOR 0")
              }
-            }}
-        
-
+           /*   if(this.monedero == 0 && this.barco.x <= canvas.width / 3  )
+            {
+            
+            } */
+              
+            
+             
+            
+          
+             
             this.moveAll();
             this.drawAll();
 
-            this.clearObstacles()
-            this.clearEnemyAguiluchos()
-            this.clearDinerito()
-
+            
             if(this.isDinerito()) {
-                //this.gameOver()
+               
                 
                 this.monedero++;
             }
 
             if(this.isEnemiguito()) {
+              
               this.gameOver();
             }
+
+            if (this.isImpactito()) {
+              
+            } else {
+               
+            }
+
+            this.clearObstacles()
+            this.clearEnemyAguiluchos()
+            this.clearDinerito()
+
 
         }, 1000 / this.fps)
      
@@ -96,24 +120,24 @@ const Game = {
         this.barco = new Barco(this.canvas.width, this.canvas.height, this.ctx)
         this.backgroundMoon = new BackgroundMoon(this.canvas.width, this.canvas.height, this.ctx)
         this.player = new Player(this.canvas.width, this.canvas.height, this.ctx, this.keys)
-        // this.enemy = new Enemy(this.canvas.width, this.canvas.height, this.ctx)
+
        
         
         this.monedero = 0;
         this.cofre = 0;
-
         this.obstacles = [];
         this.enemyAguiluchos = [];
         this.dineritos = [];
         this.scoreBoard = ScoreBoard;
         this.frameCounter = 0
         
+        
        
     },
 
     moveAll: function() {
         this.background.move()
-        /* this.barco.move() */
+        this.barco.move()
         this.backgroundMoon.move()
         this.player.move()
        
@@ -203,18 +227,38 @@ const Game = {
     },
     isEnemiguito: function() {
         return this.enemyAguiluchos.some((enemySome) => {
-            const result = (
+            return (
             this.player.x + (this.player.w / 1.8) >= enemySome.x &&
             this.player.x + (this.player.w * 0.3) <= enemySome.x + enemySome.w  &&
             this.player.y + (this.player.h - 145) >= enemySome.y &&
             this.player.y + (this.player.h) <= enemySome.y + enemySome.h)
-
-            if (result) {
-                this.enemyAguiluchos = this.enemyAguiluchos.filter((enemyFilter) => {return enemyFilter !== enemySome})
-            }
-
-            return result
+   
         })
+    },
+
+    isImpactito: function() {
+
+        return this.player.bullets.some(bullet => {  
+            return this.enemyAguiluchos.some(aguilucho => {
+        
+                let resultado = (
+                    bullet.x + bullet.r >= aguilucho.x &&
+                    bullet.x - bullet.r <= aguilucho.x + aguilucho.w  &&
+                    bullet.y + bullet.r >= aguilucho.y &&
+                    bullet.y - bullet.r <= aguilucho.y + aguilucho.h)
+        
+                if(resultado) {
+
+                    this.player.bullets = this.player.bullets.filter(b => b !== bullet)
+                    this.enemyAguiluchos = this.enemyAguiluchos.filter(a => a !== aguilucho)
+                  
+                }
+
+                return resultado
+        
+         })
+        })
+
     },
 
     
@@ -236,3 +280,6 @@ const Game = {
     }
 
 }
+
+
+
