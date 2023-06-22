@@ -19,7 +19,7 @@ class Player {
         
 
         this.img = new Image();
-        this.img.src = "/Users/funche/Desktop/Bootcamp/juego/supermario/img/PngItem_1936084(nuevo).png"
+        this.img.src = "img/PngItem_1936084(nuevo).png"
         
         this.img.frames = 9;
         this.img.frameIndex = 0;

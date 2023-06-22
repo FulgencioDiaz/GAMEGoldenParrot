@@ -5,7 +5,7 @@ class Background {
         this.h = h;
 
         this.img = new Image();
-        this.img.src = "/Users/funche/Desktop/Bootcamp/juego/supermario/img/assets_-LDgX-RykK9XCDxfIhX__-LDgX7Ifr9nc11ubI925_-LDgXIVR3MFdOFpoiX0w_sky-clouds.jpeg"
+        this.img.src = "img/assets_-LDgX-RykK9XCDxfIhX__-LDgX7Ifr9nc11ubI925_-LDgXIVR3MFdOFpoiX0w_sky-clouds.jpeg"
 
         this.x = 0;
         this.y = 0;

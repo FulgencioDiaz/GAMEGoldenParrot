@@ -17,7 +17,7 @@ class Enemy {
         
 
         this.img = new Image();
-        this.img.src = "/Users/funche/Desktop/Bootcamp/juego/supermario/img/kisspng-bird-flight-bird-flight-bald-eagle-sprite-chameleon-5abc0b51f08c16.9537283715222731059853.png"
+        this.img.src = "img/kisspng-bird-flight-bird-flight-bald-eagle-sprite-chameleon-5abc0b51f08c16.9537283715222731059853.png"
         
         this.img.frames = 4;
         this.img.frameIndex = 0;

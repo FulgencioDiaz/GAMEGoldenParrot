@@ -5,7 +5,7 @@ class BackgroundMoon {
         this.h = innerHeight;
 
         this.img = new Image();
-        this.img.src = "/Users/funche/Desktop/Bootcamp/juego/supermario/img/Lovepik_com-400257363-sea-waves(BUENA).png"
+        this.img.src = "img/Lovepik_com-400257363-sea-waves(BUENA).png"
 
         this.x = 0;
         this.y = 120;

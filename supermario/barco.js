@@ -5,7 +5,7 @@ class Barco {
         this.h = h/2;
 
         this.img = new Image();
-        this.img.src = "/Users/funche/Desktop/Bootcamp/juego/supermario/img/pngwing.com (1).png"
+        this.img.src = "img/pngwing.com (1).png"
 
         this.x = canvas.width;
         this.y = 300;
