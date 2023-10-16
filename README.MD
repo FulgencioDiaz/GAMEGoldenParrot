@@ -23,12 +23,12 @@ En los próximo sprint se busca:
 
 <p>
 El juego está disponible en:
-<a>
+<a href="https://fulgenciodiaz.github.io/GAMEGoldenParrot/">
 https://fulgenciodiaz.github.io/GAMEGoldenParrot/
 </a>
    </p>
    <p>
-El repositorio está disponible en: <a>https://github.com/FulgencioDiaz/GAMEGoldenParrot </a>
+El repositorio está disponible en: <a href="https://github.com/FulgencioDiaz/GAMEGoldenParrot">https://github.com/FulgencioDiaz/GAMEGoldenParrot </a>
 </p>
    <p>
 Desarrollado por Fulgencio Díaz: <a href="https://www.linkedin.com/in/fulgencio-d%C3%ADaz-puga/">(Linkedin Profile)  </a>
