@@ -51,12 +51,12 @@ In the next sprint, we aim to:
 
 <p>
 The game is available at:
-<a>
+<a href="https://fulgenciodiaz.github.io/GAMEGoldenParrot/">
 https://fulgenciodiaz.github.io/GAMEGoldenParrot/
 </a>
   </p>
   <p>
-The repository is available at: <a>https://github.com/FulgencioDiaz/GAMEGoldenParrot </a>
+The repository is available at: <a href="https://github.com/FulgencioDiaz/GAMEGoldenParrot">https://github.com/FulgencioDiaz/GAMEGoldenParrot </a>
 </p>
   <p>
 Developed by Fulgencio Díaz: <a href="https://www.linkedin.com/in/fulgencio-d%C3%ADaz-puga/">(Linkedin Profile)  </a>
