@@ -15,6 +15,8 @@ const Game = {
     console.log("Cargado");
     this.canvas = document.getElementById("canvas");
     this.ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
     ScoreBoard.init(this.ctx);
 
